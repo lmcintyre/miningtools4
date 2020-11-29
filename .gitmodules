@@ -1,0 +1,6 @@
+[submodule "lib/ZiPatchLib"]
+	path = lib/ZiPatchLib
+	url = https://github.com/pmgr/ZiPatchLib.git
+[submodule "lib/Lumina"]
+	path = lib/Lumina
+	url = https://github.com/NotAdam/Lumina.git
