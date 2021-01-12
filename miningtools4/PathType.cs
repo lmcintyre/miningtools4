@@ -6,5 +6,6 @@
         Model,
         Material,
         Vfx,
+        Skeleton,
     }
 }

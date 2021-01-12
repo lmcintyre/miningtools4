@@ -3,10 +3,12 @@
     public class GeneratorConfig
     {
         public bool OutputFile;
-        public string OutputDirectory;
+        public string OutputFilename;
         public bool OutputToConsole;
+        public bool CondensedOutput;
         public bool UseSheetsToFindUsed;
         public bool BreakOnImcMissing;
-        public bool UseConcurrency;
+        public bool SpeedUpNonImcBreak;
+        // public bool UseConcurrency;
     }
 }
