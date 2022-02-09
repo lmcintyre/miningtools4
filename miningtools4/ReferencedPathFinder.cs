@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lumina;
 using Lumina.Data;
 using Lumina.Data.Structs;
 
@@ -13,15 +14,15 @@ namespace miningtools4
     // Searches all files for references to other 
     public class ReferencedPathFinder
     {
-        private Lumina.Lumina _lumina;
+        private GameData _lumina;
         private GeneratorConfig _config;
 
         private List<string> _lines;
 
         private string[] _searchTerms = {"common/", "bgcommon/", "bg/", "cut/", "chara/", "shader/", "ui/", "sound/", "vfx/", "ui_script/", "exd/", "game_script/", "music/", "sqpack_test/", "debug/"};
         private string _xivCharsetRegex = "[A-Za-z0-9._-/]";
-        
-        public ReferencedPathFinder(Lumina.Lumina lumina, GeneratorConfig config)
+
+        public ReferencedPathFinder(GameData lumina, GeneratorConfig config)
         {
             _lumina = lumina;
             _config = config;
@@ -32,10 +33,10 @@ namespace miningtools4
         public void Output()
         {
             if (_lines == null) Load();
-            
+
             if (_config.OutputToConsole)
                 _lines.ForEach(Console.WriteLine);
-            if (_config.OutputFile)
+            if (_config.OutputPath)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_config.OutputFilename));
                 File.WriteAllLines(_config.OutputFilename, _lines);
@@ -52,15 +53,15 @@ namespace miningtools4
             var results = new List<string>();
             for (int i = 0; i < file.Data.Length; i++)
             {
-                foreach (var _searchTerm in _searchTerms)
+                // here we don't want to search if it's part of an existing path
+                // i.e. if a path goes "...ff/eeebg/gjrijije" or something,
+                // we don't care about that bg
+                if (i == 0 || !IsInRange(file.Data[i - 1]))
                 {
-                    if (i > file.Data.Length - _searchTerm.Length)
-                        continue;
-                    // here we don't want to search if it's part of an existing path
-                    // i.e. if a path goes "...ff/eeebg/gjrijije" or something,
-                    // we don't care about that bg
-                    if (i == 0 || !IsInRange(file.Data[i - 1]))
+                    foreach (var _searchTerm in _searchTerms)
                     {
+                        if (i > file.Data.Length - _searchTerm.Length)
+                            continue;
                         if (file.DataSpan.Slice(i, _searchTerm.Length).SequenceEqual(Encoding.ASCII.GetBytes(_searchTerm)))
                         {
                             var bytes = new List<byte>();
@@ -68,14 +69,14 @@ namespace miningtools4
                             while (IsInRange(file.Data[foundIndex]))
                                 bytes.Add(file.Data[foundIndex++]);
                             results.Add(Encoding.ASCII.GetString(bytes.ToArray()));
-                        }    
+                        }
                     }
                 }
             }
 
             return results;
         }
-        
+
 
         private List<string> Load()
         {
@@ -109,6 +110,7 @@ namespace miningtools4
                 if (!sortedLines.Contains(taken))
                     sortedLines.Add(taken);
             }
+
             sortedLines.Sort();
             return sortedLines;
         }

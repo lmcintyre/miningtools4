@@ -4,6 +4,7 @@ using System.IO;
 using System.Text;
 using DiffPlex;
 using DiffPlex.DiffBuilder;
+using Lumina;
 using Lumina.Data.Parsing.Layer;
 using Lumina.Data.Structs.Excel;
 using Lumina.Excel;
@@ -12,12 +13,12 @@ namespace miningtools4
 {
     public class SheetDiffer
     {
-        private Lumina.Lumina _latest;
-        private Lumina.Lumina _last;
+        private GameData _latest;
+        private GameData _last;
         private GeneratorConfig _config;
         private List<string> _lines;
         
-        public SheetDiffer(Lumina.Lumina luminaLatest, Lumina.Lumina luminaLast,  GeneratorConfig config)
+        public SheetDiffer(GameData luminaLatest, GameData luminaLast,  GeneratorConfig config)
         {
             _latest = luminaLatest;
             _last = luminaLast;
@@ -33,7 +34,7 @@ namespace miningtools4
 
             if (_config.OutputToConsole)
                 _lines.ForEach(Console.WriteLine);
-            if (_config.OutputFile)
+            if (_config.OutputPath)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_config.OutputFilename));
                 File.WriteAllLines(_config.OutputFilename, _lines);

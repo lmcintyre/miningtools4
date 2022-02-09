@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Lumina;
 using Lumina.Data.Files;
 using Lumina.Data.Parsing;
 using Lumina.Excel.GeneratedSheets;
@@ -136,10 +137,10 @@ namespace miningtools4
 
         private List<Weapon> _weapons;
         private List<Quad> _usedList;
-        private Lumina.Lumina _lumina;
+        private GameData _lumina;
         private GeneratorConfig _config;
 
-        public WeaponGenerator(Lumina.Lumina lumina, GeneratorConfig config)
+        public WeaponGenerator(GameData lumina, GeneratorConfig config)
         {
             _lumina = lumina;
             _config = config;
@@ -187,7 +188,7 @@ namespace miningtools4
 
             if (config.OutputToConsole)
                 text.ForEach(Console.WriteLine);
-            if (config.OutputFile)
+            if (config.OutputPath)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(config.OutputFilename));
                 File.WriteAllLines(config.OutputFilename, text);
@@ -203,7 +204,7 @@ namespace miningtools4
 
             if (_config.OutputToConsole)
                 text.ForEach(Console.WriteLine);
-            if (_config.OutputFile)
+            if (_config.OutputPath)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_config.OutputFilename));
                 File.WriteAllLines(_config.OutputFilename, text);

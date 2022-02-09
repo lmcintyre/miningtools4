@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Lumina;
 using Lumina.Data;
 using Lumina.Data.Structs;
 
@@ -12,7 +13,7 @@ namespace miningtools4
 {
     public class AllFileSearcher
     {
-        private Lumina.Lumina _lumina;
+        private GameData _lumina;
         private GeneratorConfig _config;
 
         private List<string> _lines;
@@ -22,7 +23,7 @@ namespace miningtools4
         private byte[] _searchTermBytes;
         // private string _xivCharsetRegex = "[A-Za-z0-9._-/]";
 
-        public AllFileSearcher(Lumina.Lumina lumina, GeneratorConfig config, string searchTerm)
+        public AllFileSearcher(GameData lumina, GeneratorConfig config, string searchTerm)
         {
             _lumina = lumina;
             _config = config;
@@ -38,7 +39,7 @@ namespace miningtools4
 
             if (_config.OutputToConsole)
                 _lines.ForEach(Console.WriteLine);
-            if (_config.OutputFile)
+            if (_config.OutputPath)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_config.OutputFilename));
                 

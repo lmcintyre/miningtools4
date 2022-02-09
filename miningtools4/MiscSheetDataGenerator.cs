@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Lumina;
 using Lumina.Excel.GeneratedSheets;
 
 namespace miningtools4
@@ -59,7 +60,7 @@ namespace miningtools4
         private static string _equipSheetFilename = "equipment.csv";
         private static string _recipeSheetFilename = "recipes.csv";
 
-        private Lumina.Lumina _lumina;
+        private GameData _lumina;
         private GeneratorConfig _config;
 
         private List<string> _itemsOut;
@@ -71,7 +72,7 @@ namespace miningtools4
         private static Dictionary<uint, string> _itemNames;
         private static Dictionary<uint, RecipeLevelTable> _recipeLevels;
 
-        public MiscSheetDataGenerator(Lumina.Lumina lumina, GeneratorConfig config)
+        public MiscSheetDataGenerator(GameData lumina, GeneratorConfig config)
         {
             _lumina = lumina;
             _config = config;
@@ -100,7 +101,7 @@ namespace miningtools4
                 _recipesOut.ForEach(Console.WriteLine);
             }
                 
-            if (_config.OutputFile)
+            if (_config.OutputPath)
             {
                 Directory.CreateDirectory(_config.OutputFilename);
 
@@ -150,7 +151,7 @@ namespace miningtools4
                 _itemNames[item.RowId] = SanitizeText(item.Name);
         }
 
-        private List<string> Equipment(Lumina.Lumina lumina)
+        private List<string> Equipment(GameData lumina)
         {
             var equipment = lumina.GetExcelSheet<Item>();
             var equipList = new List<string>();
@@ -193,10 +194,10 @@ namespace miningtools4
             {
                 int thisParamValue = 0;
                 
-                for (int i = 0; i < item.UnkStruct60.Length; i++)
+                for (int i = 0; i < item.UnkData59.Length; i++)
                 {
-                    int param = item.UnkStruct60[i].BaseParam;
-                    int value = item.UnkStruct60[i].BaseParamValue;
+                    int param = item.UnkData59[i].BaseParam;
+                    int value = item.UnkData59[i].BaseParamValue;
 
                     // if (IsInRange(param))
                     if (possibleParam == (BaseParam) param)
@@ -211,7 +212,7 @@ namespace miningtools4
             return ret.Substring(0, ret.Length - 1);
         }
 
-        private List<string> Items(Lumina.Lumina lumina)
+        private List<string> Items(GameData lumina)
         {
             var items = lumina.GetExcelSheet<Item>();
             var itemsList = new List<string>();
@@ -232,7 +233,7 @@ namespace miningtools4
             return itemsList;
         }
 
-        private List<string> Recipes(Lumina.Lumina lumina)
+        private List<string> Recipes(GameData lumina)
         {
             var recipes = lumina.GetExcelSheet<Recipe>();
             var recipeList = new List<string>();
@@ -259,11 +260,11 @@ namespace miningtools4
                 var resultAmt = recipe.AmountResult;
 
                 string ingredience = "";
-                for (int i = 0; i < recipe.UnkStruct5.Length; i++)
+                for (int i = 0; i < recipe.UnkData5.Length; i++)
                 {
                     ingredience +=
-                        _itemNames.GetValueOrDefault((uint) recipe.UnkStruct5[i].ItemIngredient, "") + "," +
-                        recipe.UnkStruct5[i].AmountIngredient + ",";
+                        _itemNames.GetValueOrDefault((uint) recipe.UnkData5[i].ItemIngredient, "") + "," +
+                        recipe.UnkData5[i].AmountIngredient + ",";
                 }
 
                 ingredience = ingredience.Substring(0, ingredience.Length - 1);
@@ -288,7 +289,7 @@ namespace miningtools4
         
         private string MakeCsvRow(params string[] values)
         {
-            return values.Aggregate("", (current, val) => current + val + ",");
+            return values.Aggregate("", (current, val) => current + val + ",")[..^1];
         }
 
         private string SanitizeText(string text)

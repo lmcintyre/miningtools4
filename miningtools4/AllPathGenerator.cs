@@ -1,9 +1,10 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Lumina;
 using Lumina.Data;
 using Lumina.Data.Structs;
 using Microsoft.Data.Sqlite;
@@ -12,13 +13,13 @@ namespace miningtools4
 {
     public class AllPathGenerator
     {
-        private Lumina.Lumina _lumina;
+        private GameData _lumina;
         private GeneratorConfig _config;
 
         private Dictionary<uint, string> extDict;
         private List<string> _lines;
 
-        public AllPathGenerator(Lumina.Lumina lumina, GeneratorConfig config)
+        public AllPathGenerator(GameData lumina, GeneratorConfig config)
         {
             _lumina = lumina;
             _config = config;
@@ -33,7 +34,7 @@ namespace miningtools4
             
             if (_config.OutputToConsole)
                 _lines.ForEach(Console.WriteLine);
-            if (_config.OutputFile)
+            if (_config.OutputPath)
             {
                 Directory.CreateDirectory(Path.GetDirectoryName(_config.OutputFilename));
                 File.WriteAllLines(_config.OutputFilename, _lines);

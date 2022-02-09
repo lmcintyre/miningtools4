@@ -2,7 +2,7 @@
 {
     public class GeneratorConfig
     {
-        public bool OutputFile;
+        public bool OutputPath;
         public string OutputFilename;
         public bool OutputToConsole;
         public bool CondensedOutput;
