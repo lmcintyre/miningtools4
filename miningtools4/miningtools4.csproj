@@ -2,22 +2,32 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <LangVersion>8</LangVersion>
-        <TargetFramework>netcoreapp5.0</TargetFramework>
+        <LangVersion>latest</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     </PropertyGroup>
 
     <ItemGroup>
       <PackageReference Include="DiffPlex" Version="1.6.3" />
       <PackageReference Include="Lumina" Version="2.4.2" />
       <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.0" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
       <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\lib\Lumina.Excel\src\Lumina.Excel\Lumina.Excel.csproj" />
       <ProjectReference Include="..\lib\Lumina\src\Lumina.Excel\Lumina.Excel.csproj" />
       <ProjectReference Include="..\lib\Lumina\src\Lumina\Lumina.csproj" />
       <ProjectReference Include="..\lib\ZiPatchLib\ZiPatchLib\ZiPatchLib.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Update="Utility\comp.py">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>
