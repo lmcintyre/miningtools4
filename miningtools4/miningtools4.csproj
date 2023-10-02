@@ -3,24 +3,28 @@
     <PropertyGroup>
         <OutputType>Exe</OutputType>
         <LangVersion>latest</LangVersion>
-        <TargetFramework>net6.0</TargetFramework>
+        <TargetFramework>net7.0</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <ProduceReferenceAssembly>false</ProduceReferenceAssembly>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="DiffPlex" Version="1.6.3" />
-      <PackageReference Include="Lumina" Version="2.4.2" />
-      <PackageReference Include="Microsoft.Data.Sqlite" Version="5.0.0" />
-      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-      <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
+      <PackageReference Include="DiffPlex" Version="1.7.1" />
+      <PackageReference Include="Microsoft.Data.Sqlite" Version="7.0.5" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="System.Drawing.Common" Version="7.0.0" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\lib\Lumina.Excel\src\Lumina.Excel\Lumina.Excel.csproj" />
-      <ProjectReference Include="..\lib\Lumina\src\Lumina.Excel\Lumina.Excel.csproj" />
-      <ProjectReference Include="..\lib\Lumina\src\Lumina\Lumina.csproj" />
+      <ProjectReference Include="..\lib\Lumina.Excel\src\Lumina.Excel\Lumina.Excel.csproj">
+<!--          <SetTargetFramework>net7.0</SetTargetFramework>-->
+<!--          <SetPlatform>AnyCPU</SetPlatform>-->
+      </ProjectReference>
+<!--      <ProjectReference Include="..\lib\Lumina\src\Lumina\Lumina.csproj">-->
+<!--&lt;!&ndash;        <SetTargetFramework>net7.0</SetTargetFramework>&ndash;&gt;-->
+<!--&lt;!&ndash;      <SetPlatform>AnyCPU</SetPlatform>&ndash;&gt;-->
+<!--      </ProjectReference>-->
       <ProjectReference Include="..\lib\ZiPatchLib\ZiPatchLib\ZiPatchLib.csproj" />
     </ItemGroup>
 

@@ -15,41 +15,41 @@ public static class Util
 {
 	private static Dictionary<uint, string> _extDict = new()
 	{
-		{ 0x00616574, "aet" },
-		{ 0x00424D41, "amb" },
-		{ 0x41564658, "avfx" },
-		{ 0x00617774, "awt" },
-		{ 0x42545543, "cutb" },
-		{ 0x00656964, "eid" },
-		{ 0x42564E45, "envb" },
-		{ 0x42535345, "essb" },
-		{ 0x46445845, "exd" },
-		{ 0x46485845, "exh" },
-		{ 0x544C5845, "exl" },
-		{ 0x76736366, "fdt" },
-		{ 0x64746667, "gfd" },
-		{ 0x67676420, "ggd" },
-		{ 0x00677A64, "gzd" },
-		{ 0x3142434C, "lcb" },
-		{ 0x3142474C, "lgb" },
-		{ 0x61754C1B, "luab" },
-		{ 0x3142564C, "lvb" },
-		{ 0x006D6C74, "mlt" },
-		{ 0x4D534246, "msb" },
-		{ 0x4253424F, "obsb" },
-		{ 0x20706170, "pap" },
-		{ 0x7079626C, "plt" },
-		{ 0x00EE0ACD, "ptbl" },
-		{ 0x42444553, "scd" },
-		{ 0x31424753, "sgb" },
-		{ 0x64436853, "shcd" },
-		{ 0x6B506853, "shpk" },
-		{ 0x736B6C62, "sklb" },
-		{ 0x736B6C70, "skp" },
-		{ 0x31425653, "svb" },
-		{ 0x424C4D54, "tmb" },
-		{ 0x756C6468, "uld" },
-		{ 0x31425755, "uwb" }
+		{ 0x00616574, "aet" },	// Animation Exchange Table
+		{ 0x00424D41, "amb" },	// Ambient Binary
+		{ 0x41564658, "avfx" },	// Audio/Visual Effects
+		{ 0x00617774, "awt" },	// Animation Work Table
+		{ 0x42545543, "cutb" }, // Cutscene Binary
+		{ 0x00656964, "eid" },	// Element ID
+		{ 0x42564E45, "envb" }, // Environment Binary
+		{ 0x42535345, "essb" },	// Environment Sound Set Binary
+		{ 0x46445845, "exd" },	// Excel Data
+		{ 0x46485845, "exh" },	// Excel Header
+		{ 0x544C5845, "exl" },	// Excel List
+		{ 0x76736366, "fdt" },	// Font Data Type
+		{ 0x64746667, "gfd" },	// Gaiji Font Data
+		{ 0x67676420, "ggd" },	// Grass Grid Data
+		{ 0x00677A64, "gzd" },	// Grass Zone Data
+		{ 0x3142434C, "lcb" },	// Layer Collision Binary
+		{ 0x3142474C, "lgb" },	// Layer Group Binary
+		{ 0x61754C1B, "luab" },	// Lua Binary
+		{ 0x3142564C, "lvb" },	// Level Binary
+		{ 0x006D6C74, "mlt" },	// Motion Line Table
+		{ 0x4D534246, "msb" },	// ? ? Binary (Music Binary?)
+		{ 0x4253424F, "obsb" },	// Object Behavior Set Binary
+		{ 0x20706170, "pap" },	// Partial Animation Pack
+		{ 0x7079626C, "plt" },	// Pap Load Table
+		{ 0x00EE0ACD, "ptbl" },	// Pap Load Table 2
+		{ 0x42444553, "scd" },	// Sound Container Data (?)
+		{ 0x31424753, "sgb" },	// Shared Group Binary
+		{ 0x64436853, "shcd" },	// Shader Code
+		{ 0x6B506853, "shpk" },	// Shader Pack
+		{ 0x736B6C62, "sklb" },	// Skeleton Binary
+		{ 0x736B6C70, "skp" },	// Skeleton Parameter
+		{ 0x31425653, "svb" },	// Sky Visibility Binary
+		{ 0x424C4D54, "tmb" },	// Timeline Binary
+		{ 0x756C6468, "uld" },	// UI ? ?
+		{ 0x31425755, "uwb" }	// Underwater Binary
 	};
 		
 	public static string GetExtension(FileResource file)

@@ -28,8 +28,8 @@ public class StatusIconFinder
     private const int STATUS_MIN = 10000;
     private const int STATUS_MAX = 19999;
 
-    private Dictionary<ushort, string> names;
-    private List<int> usedIcons;
+    private Dictionary<uint, string> names;
+    private List<uint> usedIcons;
     private List<Icon> icons;
     private GeneratorConfig _config;
 
@@ -37,11 +37,11 @@ public class StatusIconFinder
     {
         this.lumina = lumina;
         _config = conf;
-        usedIcons = new List<int>();
+        usedIcons = new List<uint>();
         icons = new List<Icon>();
             
         _status = lumina.Excel.GetSheet<Status>();
-        names = new Dictionary<ushort, string>();
+        names = new Dictionary<uint, string>();
         foreach (var s in _status)
         {
             names[s.Icon] = s.Name;
